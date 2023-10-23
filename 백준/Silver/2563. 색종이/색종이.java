@@ -4,51 +4,28 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class Main {
-
-
-    public static void main(String[] args) throws IOException {
-
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        int N = Integer.parseInt(br.readLine());
-
-        int sum = 0;
-
-        Boolean[][] b = new Boolean[100][100];
-
-                for (int i = 0; i < 100; i++) {
-            for (int j = 0; j < 100; j++) {
-                b[i][j] = false;
-            }
-        }
-        
+    public static void main(String args[]) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        int count = Integer.parseInt(bufferedReader.readLine());
         int x = 0;
         int y = 0;
+        int totalArea = 0;
+        boolean[][] paper = new boolean[100][100];
 
-        for (int i=0; i<N; i++){
-            StringTokenizer st = new StringTokenizer(br.readLine());
-
-
-            x = Integer.parseInt(st.nextToken());
-            y = Integer.parseInt(st.nextToken());
-
-            for(int j = x; j < x+10; j++){
-                for(int k = y; k < y+10; k++){
-
-                    if(!b[j][k]){
-                        b[j][k] = true;
-                        sum++;
+        for (int i = 0; i < count; i++) {
+            StringTokenizer stringTokenizer = new StringTokenizer(bufferedReader.readLine());
+            x = Integer.parseInt(stringTokenizer.nextToken());
+            y = Integer.parseInt(stringTokenizer.nextToken());
+            for (int j = x; j < x + 10; j++) {
+                for (int k = y; k < y + 10; k++) {
+                    if (!paper[j][k]) {
+                        paper[j][k] = true;
+                        totalArea++;
                     }
-
                 }
+
             }
-
-
         }
-
-
-        System.out.println(sum);
-
-
+        System.out.println(totalArea);
     }
 }
