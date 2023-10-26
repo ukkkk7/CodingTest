@@ -23,10 +23,10 @@ public class Main {
             }
         }
         
-        if(a.size() >= k){
-            System.out.println(a.get(k-1));
-        } else {
+        if(a.size() < k){
             System.out.println(0);
+        } else {
+            System.out.println(a.get(k-1));
         }
 
     }
