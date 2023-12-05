@@ -25,72 +25,28 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
 
+        HashMap<Integer, Integer> map = new HashMap<>();
+
         int n = Integer.parseInt(br.readLine());
-        int[] arr = new int[n];
 
         StringTokenizer st = new StringTokenizer(br.readLine());
-
         for(int i=0; i<n; i++){
-            arr[i] = Integer.parseInt(st.nextToken());
-        }
+            int key = Integer.parseInt(st.nextToken());
 
-        Arrays.sort(arr);
+            //value의 값을 설정할 때 key값이 존재한다면 1을 누적하는 카운트 방식
+            map.put(key, map.getOrDefault(key, 0)+1);
+        }
 
         int m = Integer.parseInt(br.readLine());
         st = new StringTokenizer(br.readLine());
 
-        //m개의 수를 입력받음과 동시에 이분탐색을 진행
-        for(int i = 0; i<m; i++){
-
+        for(int i=0; i<m; i++){
             int key = Integer.parseInt(st.nextToken());
 
-            sb.append(upper(key, arr) - lower(key, arr)).append(" ");
-
+            sb.append(map.getOrDefault(key, 0)).append(" ");
         }
 
         System.out.println(sb);
+
     }
-
-    //상한선을 구하는 메소드
-    private static int upper(int key, int[] arr){
-
-        //탐색하는 범위가
-        int lo=0;
-        int hi=arr.length;
-        //lo와 hi가 같아지는 순간 while문이 종료되어야 한다.
-        while(lo < hi){
-            int mid = (lo+hi)/2;
-            //만일 key값이 arr[mid]값이랑 같은데 다음 인덱스 또한 같다면? 다음 인덱스로 이동하기 위해 lo값을 높여주어야 한다.
-            //그러므로 첫번째 if문의 조건은 key가 arr[mid]보다 작아야 한다가 된다.
-            if(key < arr[mid]){
-                hi=mid;
-            } else {
-                //key값이 arr[mid]값과 같거나 크다면 lo를 옮겨준다
-                lo = mid+1;
-            }
-        }
-        //lo를 리턴해주는 이유는 lo를 계속해서 오른쪽으로 움직이며 상한선을 찾고 상한선에 도달했을 때의 lo의 값이 상한값이 되기 때문에
-        return lo;
-    }
-
-
-    private static int lower(int key, int[] arr){
-
-        int lo = 0;
-        int hi = arr.length;
-
-        while (lo<hi){
-            int mid = (lo+hi)/2;
-            if(key <= arr[mid]){
-                hi=mid;
-            } else {
-                lo = mid + 1;
-            }
-        }
-
-        return lo;
-    }
-
-
-
 }
