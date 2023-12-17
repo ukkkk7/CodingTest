@@ -22,19 +22,24 @@ public class Main {
 
         int n = Integer.parseInt(br.readLine());
 
-        Deque<Integer> q = new LinkedList<>();
+        int[] q = new int[2*n];
+
+        int preIdx=1;
+        int lastIdx=n;
 
         for(int i=1; i<=n; i++){
-            q.offer(i);
+            q[i] = i;
         }
 
-        while (q.size() > 1 ){
-            q.poll();
-            q.offer(q.poll());
+        while (n-- > 1){
+            preIdx++;
+            q[lastIdx+1] = q[preIdx];
+            lastIdx++;
+            preIdx++;
         }
 
 
-        System.out.println(q.poll());
+        System.out.println(q[preIdx]);
 
 
     }
